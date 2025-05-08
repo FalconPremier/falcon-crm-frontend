@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function HeroSection() {
      return (
-        <section className="relative flex flex-col items-center justify-center py-10 sm:py-14 md:py-20 lg:py-28">
+        <div className="relative flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-20 lg:pt-28 h-[100vh]">
             {/* Responsive Logo */}
             <div className="w-40 sm:w-52 md:w-64 lg:w-72 xl:w-80 mx-auto mb-6 md:mb-10">
                 <Image
@@ -21,7 +21,7 @@ export function HeroSection() {
             </div>
 
             {/* Background with Beams and Title */}
-            <BackgroundBeamsWithCollision className="h-[10rem] md:h-[40rem] flex flex-col items-center justify-center">
+            <BackgroundBeamsWithCollision className="h-[10rem] md:h-[20rem] lg:h-full flex flex-col  justify-center">
                 <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-bold text-center text-black dark:text-white font-display tracking-tight leading-tight relative z-20">
                     Finding The Right Home{" "}
                     <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
@@ -33,14 +33,14 @@ export function HeroSection() {
                         </div>
                     </div>
                 </h2>
-                <Button variant="default">
-                    Login
+                <Button className="mt-10 text-xl " variant="default" size="lg">
+                    <Link href="/login">Login</Link>
                 </Button>
 
             </BackgroundBeamsWithCollision>
 
 
 
-        </section>
+        </div>
     );
 }

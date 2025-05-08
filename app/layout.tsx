@@ -31,6 +31,9 @@ export default function RootLayout({
       <CustomThemeProvider>
         {children}
       </CustomThemeProvider>
+      {/*<div className=" flex justify-center align-middle">*/}
+      {/*    <span>All Rights Reserved. Falcon Premier Real Estate @2025</span>*/}
+      {/*</div>*/}
       </body>
     </html>
   );
