@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -22,7 +21,7 @@ export function LoginForm({
           <a href="#" className="flex items-center gap-2 self-center font-medium">
             <Image src="/FalconLogo.png" alt="Falcon" width={200} height={200} />
           </a>
-          <CardTitle className="text-xl">Welcome back</CardTitle>
+          <CardTitle className="text-xl text-slate-500">Welcome back</CardTitle>
           {/*<CardDescription>*/}
           {/*  Login with your Apple or Google account*/}
           {/*</CardDescription>*/}
@@ -43,14 +42,15 @@ export function LoginForm({
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
+
                   </div>
                   <Input id="password" type="password" required />
+                  <a
+                      href="#"
+                      className="ml-auto text-sm underline-offset-4 hover:underline"
+                  >
+                    Forgot your password?
+                  </a>
                 </div>
                 <Button type="submit" className="w-full">
                   Login
