@@ -3,29 +3,18 @@
 import * as React from "react"
 import {
   BookOpen,
-  Bot, FileSpreadsheet, Folder, Forward,
-  Frame,
-  Map, Megaphone, MoreHorizontal,
-  PieChart,
-  Settings2,
-  SquareTerminal, Trash2, UsersRound,
+  Bot,
+  Settings2, UsersRound,
 } from "lucide-react"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter, SidebarGroup, SidebarGroupLabel,
-  SidebarHeader, SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem,
-  SidebarRail, useSidebar,
+  SidebarFooter,
+  SidebarHeader, SidebarMenu,  SidebarMenuButton, SidebarMenuItem,
+  SidebarRail,
 } from "@/components/ui/sidebar"
 import Image from "next/image";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import {NavMain} from "@/components/nav-main";
 

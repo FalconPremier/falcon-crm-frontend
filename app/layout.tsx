@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {CustomThemeProvider} from "@/app/_providers/theme";
+import {CustomThemeProvider} from "@/lib/providers/theme";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
