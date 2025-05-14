@@ -23,7 +23,10 @@
                                 <Breadcrumbs/>
                             </div>
                         </header>
-                        {children}
+                        <section className='pt-3 px-4'>
+                            {children}
+                        </section>
+
                     </SidebarInset>
                 </SidebarProvider>
             )

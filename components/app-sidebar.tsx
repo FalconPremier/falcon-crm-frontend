@@ -3,7 +3,7 @@
 import * as React from "react"
 import {
   BookOpen,
-  Bot,
+  Bot, LayoutDashboard,
   Settings2, UsersRound,
 } from "lucide-react"
 import { NavUser } from "@/components/nav-user"
@@ -27,10 +27,30 @@ const data = {
   },
   sidebarItems: [
     {
-      title: "Agent",
-      url: "#",
-      icon: UsersRound,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutDashboard,
       isActive: true,
+      // items: [
+      //   {
+      //     title: "History",
+      //     url: "#",
+      //   },
+      //   {
+      //     title: "Starred",
+      //     url: "#",
+      //   },
+      //   {
+      //     title: "Settings",
+      //     url: "#",
+      //   },
+      // ],
+    },
+    {
+      title: "Agent",
+      url: "/agent",
+      icon: UsersRound,
+      isActive: false,
       // items: [
       //   {
       //     title: "History",
