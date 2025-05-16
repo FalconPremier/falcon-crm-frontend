@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -52,8 +53,8 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Button type="submit" className="w-full">
-                  Login
+                <Button type="submit" className="w-full" asChild>
+                  <Link href="/dashboard">Login</Link>
                 </Button>
               </div>
               <div className="text-center text-sm">

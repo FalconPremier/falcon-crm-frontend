@@ -20,8 +20,6 @@ export function HeroSection() {
                 />
             </div>
 
-            {/* Background with Beams and Title */}
-            <BackgroundBeamsWithCollision className="h-[10rem] md:h-[20rem] lg:h-full flex flex-col  justify-center">
                 <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-bold text-center text-black dark:text-white font-display tracking-tight leading-tight relative z-20">
                     Finding The Right Home{" "}
                     <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
@@ -36,11 +34,6 @@ export function HeroSection() {
                 <Button className="mt-10 text-xl " variant="default" size="lg">
                     <Link href="/login">Login</Link>
                 </Button>
-
-            </BackgroundBeamsWithCollision>
-
-
-
         </div>
     );
 }

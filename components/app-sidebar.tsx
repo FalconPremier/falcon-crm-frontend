@@ -47,8 +47,8 @@ const data = {
       // ],
     },
     {
-      title: "Agent",
-      url: "/agent",
+      title: "Users",
+      url: "/users",
       icon: UsersRound,
       isActive: false,
       // items: [

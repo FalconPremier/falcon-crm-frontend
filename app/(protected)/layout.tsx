@@ -23,7 +23,7 @@
                                 <Breadcrumbs/>
                             </div>
                         </header>
-                        <section className='pt-3 px-4'>
+                        <section className='pt-3 px-10'>
                             {children}
                         </section>
 
