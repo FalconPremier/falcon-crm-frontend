@@ -22,6 +22,9 @@ import {
 } from '@/components/ui/select';
 import { fileUploadOnChangeHandler } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { ICreateAgentResponse } from '@/interfaces/IResponse';
+import { postMultiPartFormRequestHandler } from '@/lib/apis';
+import { UserRoutes } from '@/lib/apis/routes';
 
 export default function CreateUserForm() {
   const formSchema = z.object({
@@ -164,8 +167,30 @@ export default function CreateUserForm() {
     },
   });
 
-  const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
+  const onSubmitHandler = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    const formData = new FormData();
+    formData.append('name', values.name);
+    formData.append('email', values.email);
+    formData.append('phone', values.phone);
+    formData.append('emiratesId', values.emiratesId);
+    formData.append('profileImage', values.profileImage[0]);
+    formData.append('passport', values.passport[0]);
+    formData.append('emiratesIdDoc', values.emiratesIdDoc[0]);
+    formData.append('insurance', values.insurance[0]);
+    formData.append('contract', values.contract[0]);
+    formData.append('offerLetter', values.offerLetter[0]);
+    formData.append('simCardResponsibility', values.simCardResponsibility[0]);
+    if (values.drivingLicense) {
+      formData.append('drivingLicense', values.drivingLicense[0]);
+    }
+
+    const response: ICreateAgentResponse | null =
+      await postMultiPartFormRequestHandler<ICreateAgentResponse>(
+        UserRoutes.CREATE_AGENT,
+        formData,
+      );
+    console.log(response);
   };
   return (
     <Form {...form}>

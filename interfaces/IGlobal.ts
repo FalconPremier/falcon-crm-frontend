@@ -16,3 +16,9 @@ export interface IFileUploadConfig<T extends FieldValues> {
     invalidNumber?: string;
   };
 }
+
+export interface IResponseWrapper<T> {
+  data: T;
+  success: boolean;
+  errors: Array<Error>;
+}

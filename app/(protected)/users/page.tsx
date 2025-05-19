@@ -1,43 +1,16 @@
 import { SetBreadcrumbs } from '@/components/set-bread-crumb';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { columns, Payment } from '@/app/(protected)/users/columns';
+import { columns } from '@/app/(protected)/users/columns';
 import { DataTable } from '@/app/(protected)/users/data-table';
 import Link from 'next/link';
+import { getRequestHandler, postRequestHandler } from '@/lib/apis';
+import { UserRoutes } from '@/lib/apis/routes';
+import { IGetUserResponse } from '@/interfaces/IResponse';
+export default async function Page() {
+  let tableData;
+  const response = await postRequestHandler<IGetUserResponse[], {}>(UserRoutes.GET_USERS);
 
-export default function Page() {
-  const data: Payment[] = [
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-  ];
   return (
     <div className="flex flex-1 flex-col">
       <SetBreadcrumbs
@@ -56,9 +29,11 @@ export default function Page() {
             </Link>
           </Button>
         </div>
-        <div>
-          <DataTable columns={columns} data={data} />
-        </div>
+        {response && (
+          <div>
+            <DataTable columns={columns} data={response} />
+          </div>
+        )}
       </div>
     </div>
   );
