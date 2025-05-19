@@ -1,8 +1,5 @@
-
-import {HeroSection} from "@/app/_components/HeroSection";
+import { HeroSection } from '@/app/_components/HeroSection';
 
 export default function Home() {
-  return (
-<HeroSection />
-  );
+  return <HeroSection />;
 }

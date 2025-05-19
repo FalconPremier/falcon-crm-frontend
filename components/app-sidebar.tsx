@@ -1,34 +1,33 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import {
-  BookOpen,
-  Bot, LayoutDashboard,
-  Settings2, UsersRound,
-} from "lucide-react"
-import { NavUser } from "@/components/nav-user"
+import * as React from 'react';
+import { BookOpen, Bot, LayoutDashboard, Settings2, UsersRound } from 'lucide-react';
+import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader, SidebarMenu,  SidebarMenuButton, SidebarMenuItem,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import Image from "next/image";
-import Link from "next/link";
-import {NavMain} from "@/components/nav-main";
+} from '@/components/ui/sidebar';
+import Image from 'next/image';
+import Link from 'next/link';
+import { NavMain } from '@/components/nav-main';
 
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'shadcn',
+    email: 'm@example.com',
+    avatar: '/avatars/shadcn.jpg',
   },
   sidebarItems: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: 'Dashboard',
+      url: '/dashboard',
       icon: LayoutDashboard,
       isActive: true,
       // items: [
@@ -47,8 +46,8 @@ const data = {
       // ],
     },
     {
-      title: "Users",
-      url: "/users",
+      title: 'Users',
+      url: '/users',
       icon: UsersRound,
       isActive: false,
       // items: [
@@ -67,8 +66,8 @@ const data = {
       // ],
     },
     {
-      title: "Models",
-      url: "#",
+      title: 'Models',
+      url: '#',
       icon: Bot,
       // items: [
       //   {
@@ -86,53 +85,53 @@ const data = {
       // ],
     },
     {
-      title: "Documentation",
-      url: "#",
+      title: 'Documentation',
+      url: '#',
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: 'Introduction',
+          url: '#',
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: 'Get Started',
+          url: '#',
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: 'Tutorials',
+          url: '#',
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: 'Changelog',
+          url: '#',
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: 'General',
+          url: '#',
         },
         {
-          title: "Team",
-          url: "#",
+          title: 'Team',
+          url: '#',
         },
         {
-          title: "Billing",
-          url: "#",
+          title: 'Billing',
+          url: '#',
         },
         {
-          title: "Limits",
-          url: "#",
+          title: 'Limits',
+          url: '#',
         },
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -141,21 +140,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href='/dashboard'>
-                <Image src="/FalconLogo.png"  width={50} height={20} alt="FlaconLogo"/>
-                <span className="text-lg text-secondary-foreground   font-bold">Falcon Premier</span>
+              <Link href="/dashboard">
+                <Image src="/FalconLogo.png" width={50} height={20} alt="FlaconLogo" />
+                <span className="text-secondary-foreground text-lg font-bold">Falcon Premier</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-       <NavMain items={data.sidebarItems} groupLabel='Management'/>
+        <NavMain items={data.sidebarItems} groupLabel="Management" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
