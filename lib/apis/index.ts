@@ -57,7 +57,6 @@ export const postRequestHandler = async <T, BodyDataType>(
     });
 
     const data = response.data;
-    console.log('Request Response', response);
     if (data.success) {
       return data.data;
     } else {

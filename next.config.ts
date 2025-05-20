@@ -8,7 +8,13 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    remotePatterns: [new URL('https://falcon-crm.s3.me-central-1.amazonaws.com/**')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dd6ynagixvnkj.cloudfront.net',
+        pathname: '**',
+      },
+    ],
   },
 };
 
