@@ -5,11 +5,20 @@ export interface IGetUserResponse {
   name: string;
   phone: string;
   emiratesId: string;
-  profileImage: IMedia;
+  profileImage: IFile;
   role: string;
+  docs: {
+    passport: IFile;
+    emiratesId: IFile;
+    insurance: IFile;
+    contract: IFile;
+    offerLetter: IFile;
+    simCardResponsibility: IFile;
+    drivingLicense?: IFile;
+  };
 }
 
-interface IMedia {
+interface IFile {
   link: string;
   mimetype: string;
 }
