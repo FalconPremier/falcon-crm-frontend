@@ -22,3 +22,14 @@ interface IFile {
   link: string;
   mimetype: string;
 }
+
+export interface ILoginResponse {
+  user: {
+    name: string;
+    _id: string;
+    onboarded: boolean;
+    role: string;
+    email: string;
+  };
+  accessToken: string;
+}

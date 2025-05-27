@@ -1,12 +1,68 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import Image from 'next/image';
-import Link from 'next/link';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { ILoginResponse } from '@/interfaces/IResponse';
+import { postRequestHandler } from '@/lib/apis';
+import { AuthRoutes } from '@/lib/apis/routes';
+import { useAuthStore } from '@/lib/store/useAuthStore';
+import { toast } from 'sonner';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+  const formSchema = z.object({
+    email: z.string().email(),
+    password: z.string(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmitHandler = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    const response: ILoginResponse | null = await postRequestHandler<
+      ILoginResponse,
+      {
+        email: string;
+        password: string;
+      }
+    >(AuthRoutes.LOGIN, {
+      email: values.email,
+      password: values.password,
+    });
+    if (response) {
+      useAuthStore.getState().setAuth(
+        {
+          id: response.user._id,
+          name: response.user.name,
+          email: response.user.email,
+          role: response.user.role,
+          onboarded: response.user.onboarded,
+        },
+        response.accessToken,
+      );
+      toast.success(`Welcome ${response.user.name}`);
+    }
+  };
+
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card className="gap-12">
@@ -15,39 +71,64 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
             <Image src="/FalconLogo.png" alt="Falcon" width={200} height={200} />
           </a>
           <CardTitle className="text-xl text-slate-500">Welcome back</CardTitle>
-          {/*<CardDescription>*/}
-          {/*  Login with your Apple or Google account*/}
-          {/*</CardDescription>*/}
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="grid gap-6">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmitHandler)}>
               <div className="grid gap-6">
-                <div className="grid gap-3">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="m@example.com" required />
-                </div>
-                <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                <div className="grid gap-6">
+                  <div className="grid gap-3">
+                    {/*<Label htmlFor="email">Email</Label>*/}
+                    {/*<Input id="email" type="email" placeholder="m@example.com" required />*/}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Email" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <Input id="password" type="password" required />
-                  <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
-                    Forgot your password?
+                  <div className="grid gap-3">
+                    {/*<div className="flex items-center">*/}
+                    {/*  <Label htmlFor="password">Password</Label>*/}
+                    {/*</div>*/}
+                    {/*<Input id="password" type="password" required />*/}
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Password</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+                      Forgot your password?
+                    </a>
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Login
+                  </Button>
+                </div>
+                <div className="text-center text-sm">
+                  Don&apos;t have an account?{' '}
+                  <a href="#" className="underline underline-offset-4">
+                    Join Falcon Premier Team
                   </a>
                 </div>
-                <Button type="submit" className="w-full" asChild>
-                  <Link href="/dashboard">Login</Link>
-                </Button>
               </div>
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{' '}
-                <a href="#" className="underline underline-offset-4">
-                  Join Falcon Premier Team
-                </a>
-              </div>
-            </div>
-          </form>
+            </form>
+          </Form>
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">

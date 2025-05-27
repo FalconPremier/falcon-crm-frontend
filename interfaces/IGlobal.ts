@@ -22,3 +22,11 @@ export interface IResponseWrapper<T> {
   success: boolean;
   errors: Array<Error>;
 }
+
+export interface IUserState {
+  id: string;
+  role: string;
+  onboarded: boolean;
+  name: string;
+  email: string;
+}

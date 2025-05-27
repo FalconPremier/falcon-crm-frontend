@@ -3,7 +3,6 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { AppSidebar } from '@/components/app-sidebar';
 import { Separator } from '@/components/ui/separator';
 import Breadcrumbs from '@/components/bread-crumb';
-
 export default function ProtectedLayout({
   children,
 }: Readonly<{

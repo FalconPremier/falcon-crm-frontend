@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { CustomThemeProvider } from '@/lib/providers/theme';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { Toaster } from '@/components/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,7 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CustomThemeProvider>{children}</CustomThemeProvider>
+        <CustomThemeProvider>
+          {children}
+          <Toaster />
+        </CustomThemeProvider>
         {/*<div className=" flex justify-center align-middle">*/}
         {/*    <span>All Rights Reserved. Falcon Premier Real Estate @2025</span>*/}
         {/*</div>*/}

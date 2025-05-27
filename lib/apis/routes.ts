@@ -1,4 +1,8 @@
 export enum UserRoutes {
-  CREATE_AGENT = '/user/createAgent',
-  GET_USERS = '/user/get',
+  CREATE_AGENT = '/admin/user/createAgent',
+  GET_USERS = '/admin/user/get',
+}
+
+export enum AuthRoutes {
+  LOGIN = '/auth/login',
 }
