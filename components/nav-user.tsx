@@ -18,6 +18,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import { useAuthStore } from '@/lib/store';
+import { useCallback } from 'react';
+import { postRequestHandler } from '@/lib/apis';
+import { AuthRoutes, UserRoutes } from '@/lib/apis/routes';
+import { redirect } from 'next/navigation';
 
 export function NavUser({
   user,
@@ -28,8 +33,15 @@ export function NavUser({
     avatar: string;
   };
 }) {
+  const clearAuth = useAuthStore.getState().clearAuth;
+  const accessToken = useAuthStore.getState().accessToken;
   const { isMobile } = useSidebar();
 
+  const handleLogout = async () => {
+    await postRequestHandler<{}, undefined>(AuthRoutes.LOGOUT, undefined, accessToken ?? undefined);
+    clearAuth();
+    redirect('/login');
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -91,7 +103,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem variant="destructive" onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

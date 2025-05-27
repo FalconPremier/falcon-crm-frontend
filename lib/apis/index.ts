@@ -2,9 +2,13 @@ import axios, { AxiosResponse } from 'axios';
 import { IResponseWrapper } from '@/interfaces/IGlobal';
 import { axiosInstance } from '@/lib/axios';
 
-export const getRequestHandler = async <T>(url: string) => {
+export const getRequestHandler = async <T>(url: string, token?: string) => {
   try {
-    const response: AxiosResponse<IResponseWrapper<T>> = await axiosInstance.get(url);
+    const headers = {
+      Accept: 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
+    };
+    const response: AxiosResponse<IResponseWrapper<T>> = await axiosInstance.get(url, { headers });
 
     const data = response.data;
     console.log('Request Response', response);
@@ -23,11 +27,13 @@ export const getRequestHandler = async <T>(url: string) => {
 export const postMultiPartFormRequestHandler = async <T>(
   url: string,
   formData: FormData,
+  token?: string,
 ): Promise<T | null> => {
   try {
     const response: AxiosResponse<IResponseWrapper<T>> = await axiosInstance.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
     });
 
@@ -48,11 +54,13 @@ export const postMultiPartFormRequestHandler = async <T>(
 export const postRequestHandler = async <T, BodyDataType>(
   url: string,
   body?: BodyDataType,
+  token?: string,
 ): Promise<T | null> => {
   try {
     const response: AxiosResponse<IResponseWrapper<T>> = await axiosInstance.post(url, body, {
       headers: {
         'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
     });
 

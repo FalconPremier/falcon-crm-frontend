@@ -5,4 +5,5 @@ export enum UserRoutes {
 
 export enum AuthRoutes {
   LOGIN = '/auth/login',
+  LOGOUT = '/auth/logout',
 }

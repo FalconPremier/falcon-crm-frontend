@@ -21,6 +21,7 @@ import { postRequestHandler } from '@/lib/apis';
 import { AuthRoutes } from '@/lib/apis/routes';
 import { useAuthStore } from '@/lib/store/useAuthStore';
 import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const formSchema = z.object({
@@ -60,6 +61,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
         response.accessToken,
       );
       toast.success(`Welcome ${response.user.name}`);
+      redirect('/dashboard');
     }
   };
 
