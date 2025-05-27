@@ -59,7 +59,6 @@ export function NavUser({
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -81,28 +80,28 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/*<DropdownMenuGroup>*/}
+            {/*  <DropdownMenuItem>*/}
+            {/*    <Sparkles />*/}
+            {/*    Upgrade to Pro*/}
+            {/*  </DropdownMenuItem>*/}
+            {/*</DropdownMenuGroup>*/}
+            {/*<DropdownMenuSeparator />*/}
+            {/*<DropdownMenuGroup>*/}
+            {/*  <DropdownMenuItem>*/}
+            {/*    <BadgeCheck />*/}
+            {/*    Account*/}
+            {/*  </DropdownMenuItem>*/}
+            {/*  <DropdownMenuItem>*/}
+            {/*    <CreditCard />*/}
+            {/*    Billing*/}
+            {/*  </DropdownMenuItem>*/}
+            {/*  <DropdownMenuItem>*/}
+            {/*    <Bell />*/}
+            {/*    Notifications*/}
+            {/*  </DropdownMenuItem>*/}
+            {/*</DropdownMenuGroup>*/}
+            {/*<DropdownMenuSeparator />*/}
             <DropdownMenuItem variant="destructive" onClick={handleLogout}>
               <LogOut />
               Log out

@@ -6,14 +6,20 @@ const PUBLIC_PATHS = ['/login', '/'];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const sessionCookie = request.cookies.get('session');
+  const isAuthenticated = sessionCookie?.value === 'true';
 
-  // Allow public routes
-  if (PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
-    return NextResponse.next();
+  const isPublicPath = PUBLIC_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`),
+  );
+
+  if (isPublicPath && isAuthenticated) {
+    // Redirect authenticated users away from public pages to dashboard
+    const dashboardUrl = new URL('/dashboard', request.url);
+    return NextResponse.redirect(dashboardUrl);
   }
 
-  // Block access to protected routes without session
-  if (!sessionCookie || sessionCookie.value !== 'true') {
+  if (!isPublicPath && !isAuthenticated) {
+    // Redirect unauthenticated users trying to access protected pages
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);
   }
