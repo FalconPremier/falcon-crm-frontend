@@ -76,3 +76,28 @@ export const postRequestHandler = async <T, BodyDataType>(
     return null;
   }
 };
+
+export const refreshAccessTokenHandler = async (token: string) => {
+  try {
+    console.log('Refresh access token:', token);
+    const response: AxiosResponse<IResponseWrapper<{ accessToken: string }>> =
+      await axiosInstance.post(
+        '/auth/refreshToken',
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        },
+      );
+    const { success, data } = response.data;
+    if (success && data.accessToken) {
+      return data.accessToken;
+    }
+    return null;
+  } catch (e) {
+    console.error('Refresh Token Request failed:', e);
+    return null;
+  }
+};

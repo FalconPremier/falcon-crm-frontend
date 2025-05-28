@@ -19,9 +19,8 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { useAuthStore } from '@/lib/store';
-import { useCallback } from 'react';
 import { postRequestHandler } from '@/lib/apis';
-import { AuthRoutes, UserRoutes } from '@/lib/apis/routes';
+import { AuthRoutes } from '@/lib/apis/routes';
 import { redirect } from 'next/navigation';
 
 export function NavUser({

@@ -7,9 +7,16 @@ import Link from 'next/link';
 import { getRequestHandler, postRequestHandler } from '@/lib/apis';
 import { UserRoutes } from '@/lib/apis/routes';
 import { IGetUserResponse } from '@/interfaces/IResponse';
+import { cookies } from 'next/headers';
+
 export default async function Page() {
-  let tableData;
-  const response = await postRequestHandler<IGetUserResponse[], {}>(UserRoutes.GET_USERS);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const response = await postRequestHandler<IGetUserResponse[], {}>(
+    UserRoutes.GET_USERS,
+    undefined,
+    accessToken,
+  );
 
   return (
     <div className="flex flex-1 flex-col">

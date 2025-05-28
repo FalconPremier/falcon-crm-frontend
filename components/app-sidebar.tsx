@@ -19,7 +19,7 @@ import { NavMain } from '@/components/nav-main';
 import { useAuthStore } from '@/lib/store';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const userData = useAuthStore.getState().user;
+  const userData = useAuthStore((state) => state.user);
   if (!userData) {
     return null;
   }
