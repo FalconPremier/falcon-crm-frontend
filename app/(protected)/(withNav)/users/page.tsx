@@ -1,8 +1,8 @@
 import { SetBreadcrumbs } from '@/components/set-bread-crumb';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { columns } from '@/app/(protected)/users/columns';
-import { DataTable } from '@/app/(protected)/users/data-table';
+import { columns } from '@/app/(protected)/(withNav)/users/columns';
+import { DataTable } from '@/app/(protected)/(withNav)/users/data-table';
 import Link from 'next/link';
 import { getRequestHandler, postRequestHandler } from '@/lib/apis';
 import { UserRoutes } from '@/lib/apis/routes';
@@ -30,7 +30,7 @@ export default async function Page() {
         <div className="flex flex-1 flex-row justify-between">
           <span className="text-secondary-foreground text-2xl font-bold">USERS</span>
           <Button asChild className="text-md">
-            <Link href="/users/create">
+            <Link href="/app/(protected)/(withNav)/users/create">
               <Plus className="" />
               <span className="">Create User</span>
             </Link>

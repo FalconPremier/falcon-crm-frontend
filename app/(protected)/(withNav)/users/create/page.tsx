@@ -1,6 +1,6 @@
 import { SetBreadcrumbs } from '@/components/set-bread-crumb';
 import { Separator } from '@/components/ui/separator';
-import CreateUserForm from '@/app/(protected)/users/create/create-user-form';
+import CreateUserForm from '@/app/(protected)/(withNav)/users/create/create-user-form';
 
 export default function Page() {
   return (

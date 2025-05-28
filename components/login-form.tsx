@@ -22,8 +22,12 @@ import { AuthRoutes } from '@/lib/apis/routes';
 import { useAuthStore } from '@/lib/store/useAuthStore';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const formSchema = z.object({
     email: z.string().email(),
     password: z.string(),
@@ -61,7 +65,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
         response.accessToken,
       );
       toast.success(`Welcome ${response.user.name}`);
-      redirect('/dashboard');
+      if (response.user.onboarded) redirect('/dashboard');
+      else redirect('/onboarding');
     }
   };
 
@@ -80,8 +85,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
               <div className="grid gap-6">
                 <div className="grid gap-6">
                   <div className="grid gap-3">
-                    {/*<Label htmlFor="email">Email</Label>*/}
-                    {/*<Input id="email" type="email" placeholder="m@example.com" required />*/}
                     <FormField
                       control={form.control}
                       name="email"
@@ -97,10 +100,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     />
                   </div>
                   <div className="grid gap-3">
-                    {/*<div className="flex items-center">*/}
-                    {/*  <Label htmlFor="password">Password</Label>*/}
-                    {/*</div>*/}
-                    {/*<Input id="password" type="password" required />*/}
                     <FormField
                       control={form.control}
                       name="password"
@@ -108,7 +107,21 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                         <FormItem>
                           <FormLabel>Password</FormLabel>
                           <FormControl>
-                            <Input placeholder="Password" {...field} />
+                            <div className="relative">
+                              <Input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder="New Password"
+                                {...field}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                                className="text-muted-foreground absolute top-1/2 right-2 -translate-y-1/2"
+                                tabIndex={-1}
+                              >
+                                {showPassword ? <EyeOff /> : <Eye />}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>

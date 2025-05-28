@@ -6,4 +6,5 @@ export enum UserRoutes {
 export enum AuthRoutes {
   LOGIN = '/auth/login',
   LOGOUT = '/auth/logout',
+  SET_PASSWORD = '/auth/setPassword',
 }
