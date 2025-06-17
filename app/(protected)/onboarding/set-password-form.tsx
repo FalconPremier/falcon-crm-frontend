@@ -23,7 +23,17 @@ import { postRequestHandler } from '@/lib/apis';
 import { AuthRoutes } from '@/lib/apis/routes';
 import { redirect } from 'next/navigation';
 
-export function SetPasswordForm({ className, ...props }: React.ComponentProps<'div'>) {
+export function SetPasswordForm({
+  source,
+  email,
+  verificationToken,
+  className,
+  ...props
+}: React.ComponentProps<'div'> & {
+  source: 'reset' | 'onboarding';
+  email?: string;
+  verificationToken?: string;
+}) {
   const user = useAuthStore((state) => state.user);
   const accessToken = useAuthStore((state) => state.accessToken);
 
@@ -48,20 +58,41 @@ export function SetPasswordForm({ className, ...props }: React.ComponentProps<'d
   });
 
   const onSubmitHandler = async (values: z.infer<typeof formSchema>) => {
-    const response: undefined | null = await postRequestHandler<
-      undefined,
-      {
-        password: string;
+    if (source === 'onboarding') {
+      const response: undefined | null = await postRequestHandler<
+        undefined,
+        {
+          password: string;
+        }
+      >(
+        AuthRoutes.SET_PASSWORD,
+        {
+          password: values.password,
+        },
+        accessToken ?? '',
+      );
+      console.log(response);
+    }
+    if (source === 'reset') {
+      if (!email || email == '' || !verificationToken || verificationToken == '') {
+        alert('Please enter a valid email or verificationToken');
+        return;
       }
-    >(
-      AuthRoutes.SET_PASSWORD,
-      {
+      const response: undefined | null = await postRequestHandler<
+        undefined,
+        {
+          email: string;
+          verificationToken: string;
+          password: string;
+        }
+      >(AuthRoutes.FORGOT_PASSWORD, {
+        email: email,
+        verificationToken: verificationToken,
         password: values.password,
-      },
-      accessToken ?? '',
-    );
-    console.log(response);
-    if (response === undefined) redirect('/dashboard');
+      });
+      console.log(response);
+      if (response === undefined) redirect('/login');
+    }
   };
 
   if (!user || !accessToken) return null;

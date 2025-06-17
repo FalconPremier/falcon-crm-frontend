@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -127,9 +128,12 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                         </FormItem>
                       )}
                     />
-                    <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+                    <Link
+                      href="/forgotPassword"
+                      className="ml-auto text-sm underline-offset-4 hover:underline"
+                    >
                       Forgot your password?
-                    </a>
+                    </Link>
                   </div>
                   <Button type="submit" className="w-full">
                     Login
